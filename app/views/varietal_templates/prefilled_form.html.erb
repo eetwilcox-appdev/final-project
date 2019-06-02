@@ -1,0 +1,35 @@
+<h1>
+  Edit varietal #<%= @varietal.id %>
+</h1>
+
+<hr>
+
+<%= render("varietal_templates/validation_failures.html.erb") %>
+
+<form action="/update_varietal_record/<%= @varietal.id %>" method="post">
+  <div>
+    <label for="grape">
+      Grape
+    </label>
+
+    <input type="text" id="grape" name="grape" value="<%= @varietal.grape %>">
+  </div>
+
+  <div>
+    <label for="wine_id">
+      Wine
+    </label>
+
+    <input type="text" id="wine_id" name="wine_id" value="<%= @varietal.wine_id %>">
+  </div>
+
+  <button>
+    Update varietal
+  </button>
+</form>
+
+<hr>
+
+<a href="/varietals">
+  Go back
+</a>

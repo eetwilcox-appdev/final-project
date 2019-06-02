@@ -1,0 +1,68 @@
+<h1>
+  Rating #<%= @rating.id %> details
+</h1>
+
+<div>
+  <div>
+    <a href="/ratings">
+      Go back
+    </a>
+  </div>
+
+  <div>
+    <a href="/existing_rating_form/<%= @rating.id %>">
+      Edit rating
+    </a>
+  </div>
+
+  <div>
+    <a href="/delete_rating/<%= @rating.id %>">
+      Delete rating
+    </a>
+  </div>
+</div>
+
+<dl>
+  <dt>
+    Wine
+  </dt>
+  <dd>
+    <%= @rating.wine_id %>
+  </dd>
+
+  <dt>
+    User
+  </dt>
+  <dd>
+    <%= @rating.user_id %>
+  </dd>
+
+  <dt>
+    Score
+  </dt>
+  <dd>
+    <%= @rating.score %>
+  </dd>
+
+  <dt>
+    Comment
+  </dt>
+  <dd>
+    <%= @rating.comment %>
+  </dd>
+
+  <dt>
+    Created at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@rating.created_at) %> ago
+  </dd>
+
+  <dt>
+    Updated at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@rating.updated_at) %> ago
+  </dd>
+</dl>
+

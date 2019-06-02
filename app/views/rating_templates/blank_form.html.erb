@@ -1,0 +1,51 @@
+<h1>
+  Add a new rating
+</h1>
+
+<hr>
+
+<%= render("rating_templates/validation_failures.html.erb") %>
+
+<form action="/insert_rating_record" method="post">
+  <div>
+    <label for="wine_id">
+      Wine
+    </label>
+
+    <input type="text" id="wine_id" name="wine_id" value="<%= @rating.wine_id %>">
+  </div>
+
+  <div>
+    <label for="user_id">
+      User
+    </label>
+
+    <input type="text" id="user_id" name="user_id" value="<%= @rating.user_id %>">
+  </div>
+
+  <div>
+    <label for="score">
+      Score
+    </label>
+
+    <input type="text" id="score" name="score" value="<%= @rating.score %>">
+  </div>
+
+  <div>
+    <label for="comment">
+      Comment
+    </label>
+
+    <textarea id="comment" name="comment"><%= @rating.comment %></textarea>
+  </div>
+
+  <button>
+    Create rating
+  </button>
+</form>
+
+<hr>
+
+<a href="/ratings">
+  Go back
+</a>

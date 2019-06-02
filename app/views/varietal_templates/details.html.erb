@@ -1,0 +1,54 @@
+<h1>
+  Varietal #<%= @varietal.id %> details
+</h1>
+
+<div>
+  <div>
+    <a href="/varietals">
+      Go back
+    </a>
+  </div>
+
+  <div>
+    <a href="/existing_varietal_form/<%= @varietal.id %>">
+      Edit varietal
+    </a>
+  </div>
+
+  <div>
+    <a href="/delete_varietal/<%= @varietal.id %>">
+      Delete varietal
+    </a>
+  </div>
+</div>
+
+<dl>
+  <dt>
+    Grape
+  </dt>
+  <dd>
+    <%= @varietal.grape %>
+  </dd>
+
+  <dt>
+    Wine
+  </dt>
+  <dd>
+    <%= @varietal.wine_id %>
+  </dd>
+
+  <dt>
+    Created at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@varietal.created_at) %> ago
+  </dd>
+
+  <dt>
+    Updated at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@varietal.updated_at) %> ago
+  </dd>
+</dl>
+

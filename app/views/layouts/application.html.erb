@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Change Me!</title>
+    <title>WineWise</title>
 
     <!-- Expand the characters we can use beyond basic ASCII 🎉 -->
     <meta charset="utf-8">
@@ -37,6 +37,68 @@
   <body>
 
     <!-- ↓↓↓ Your view templates all get plugged in below ↓↓↓ -->
+        <nav>
+      <div>
+        <a href="/">
+          <i class="fas fa-star fa-fw"></i>
+
+          Home
+        </a>
+      </div>
+
+      <div>
+        <a href="/new_wine_form">
+          <i class="fas fa-plus fa-fw"></i>
+
+          Add a wine
+        </a>
+      </div>
+
+      <div>
+        <a href="/favorites">
+          <i class="fas fa-heart fa-fw"></i>
+
+          Favorites
+        </a>
+      </div>
+
+      <div>
+        <a href="/users">
+          <i class="fas fa-users"></i>
+
+          All Users
+        </a>
+      </div>
+
+      <hr>
+
+      <% if current_user.blank? %>
+        <div>
+          <a href="/users/sign_in">
+            Sign in
+          </a>
+        </div>
+
+        <div>
+          <a href="/users/sign_up">
+            Sign up
+          </a>
+        </div>
+      <% else %>
+        <div>
+          <a href="/users/edit">
+            Edit <%= current_user.username %>'s Profile
+          </a>
+        </div>
+
+        <div>
+          <a href="/users/sign_out" data-method="delete">
+            Sign out
+          </a>
+        </div>
+      <% end %>
+    </nav>
+
     <%= yield %>
     <!-- ↑↑↑ Your view templates all get plugged in above ↑↑↑ -->
     

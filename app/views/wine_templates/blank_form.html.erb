@@ -1,0 +1,67 @@
+<h1>
+  Add a new wine
+</h1>
+
+<hr>
+
+<%= render("wine_templates/validation_failures.html.erb") %>
+
+<form action="/insert_wine_record" method="post">
+  <div>
+    <label for="name">
+      Name
+    </label>
+
+    <input type="text" id="name" name="name" value="<%= @wine.name %>">
+  </div>
+
+  <div>
+    <label for="varietal">
+      Varietal
+    </label>
+
+    <input type="text" id="varietal" name="varietal" value="<%= @wine.varietal %>">
+  </div>
+
+  <div>
+    <label for="price">
+      Price
+    </label>
+
+    <input type="text" id="price" name="price" value="<%= @wine.price %>">
+  </div>
+
+  <div>
+    <label for="location_of_origin">
+      Location of origin
+    </label>
+
+    <input type="text" id="location_of_origin" name="location_of_origin" value="<%= @wine.location_of_origin %>">
+  </div>
+
+  <div>
+    <label for="year_of_origin">
+      Year of origin
+    </label>
+
+    <input type="text" id="year_of_origin" name="year_of_origin" value="<%= @wine.year_of_origin %>">
+  </div>
+
+  <div>
+    <label for="image">
+      Image
+    </label>
+
+    <input type="text" id="image" name="image" value="<%= @wine.image %>">
+  </div>
+
+  <button>
+    Create wine
+  </button>
+</form>
+
+<hr>
+
+<a href="/wines">
+  Go back
+</a>

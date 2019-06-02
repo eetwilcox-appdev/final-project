@@ -1,0 +1,98 @@
+<h1>
+  Wine list
+</h1>
+
+<a href="/new_wine_form">
+  Add a new wine
+</a>
+
+<hr>
+
+<table>
+  <tr>
+    <th>
+      ID
+    </th>
+
+    <th>
+      Name
+    </th>
+
+    <th>
+      Varietal
+    </th>
+
+    <th>
+      Price
+    </th>
+
+    <th>
+      Location of origin
+    </th>
+
+    <th>
+      Year of origin
+    </th>
+
+    <th>
+      Image
+    </th>
+
+    <th>
+      Created at
+    </th>
+
+    <th>
+      Updated at
+    </th>
+
+    <th>
+    </th>
+  </tr>
+
+  <% @wines.each do |wine| %>
+  <tr>
+    <td>
+      <%= wine.id %>
+    </td>
+
+    <td>
+      <%= wine.name %>
+    </td>
+
+    <td>
+      <%= wine.varietal %>
+    </td>
+
+    <td>
+      <%= wine.price %>
+    </td>
+
+    <td>
+      <%= wine.location_of_origin %>
+    </td>
+
+    <td>
+      <%= wine.year_of_origin %>
+    </td>
+
+    <td>
+      <%= wine.image %>
+    </td>
+
+    <td>
+      <%= time_ago_in_words(wine.created_at) %> ago
+    </td>
+
+    <td>
+      <%= time_ago_in_words(wine.updated_at) %> ago
+    </td>
+
+    <td>
+      <a href="/wines/<%= wine.id %>">
+        Show details
+      </a>
+    </td>
+  </tr>
+  <% end %>
+</table>

@@ -1,0 +1,82 @@
+<h1>
+  Wine #<%= @wine.id %> details
+</h1>
+
+<div>
+  <div>
+    <a href="/wines">
+      Go back
+    </a>
+  </div>
+
+  <div>
+    <a href="/existing_wine_form/<%= @wine.id %>">
+      Edit wine
+    </a>
+  </div>
+
+  <div>
+    <a href="/delete_wine/<%= @wine.id %>">
+      Delete wine
+    </a>
+  </div>
+</div>
+
+<dl>
+  <dt>
+    Name
+  </dt>
+  <dd>
+    <%= @wine.name %>
+  </dd>
+
+  <dt>
+    Varietal
+  </dt>
+  <dd>
+    <%= @wine.varietal %>
+  </dd>
+
+  <dt>
+    Price
+  </dt>
+  <dd>
+    <%= @wine.price %>
+  </dd>
+
+  <dt>
+    Location of origin
+  </dt>
+  <dd>
+    <%= @wine.location_of_origin %>
+  </dd>
+
+  <dt>
+    Year of origin
+  </dt>
+  <dd>
+    <%= @wine.year_of_origin %>
+  </dd>
+
+  <dt>
+    Image
+  </dt>
+  <dd>
+    <%= @wine.image %>
+  </dd>
+
+  <dt>
+    Created at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@wine.created_at) %> ago
+  </dd>
+
+  <dt>
+    Updated at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@wine.updated_at) %> ago
+  </dd>
+</dl>
+

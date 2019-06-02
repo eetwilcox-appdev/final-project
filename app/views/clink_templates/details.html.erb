@@ -1,0 +1,54 @@
+<h1>
+  Clink #<%= @clink.id %> details
+</h1>
+
+<div>
+  <div>
+    <a href="/clinks">
+      Go back
+    </a>
+  </div>
+
+  <div>
+    <a href="/existing_clink_form/<%= @clink.id %>">
+      Edit clink
+    </a>
+  </div>
+
+  <div>
+    <a href="/delete_clink/<%= @clink.id %>">
+      Delete clink
+    </a>
+  </div>
+</div>
+
+<dl>
+  <dt>
+    Sender
+  </dt>
+  <dd>
+    <%= @clink.sender_id %>
+  </dd>
+
+  <dt>
+    Recipient
+  </dt>
+  <dd>
+    <%= @clink.recipient_id %>
+  </dd>
+
+  <dt>
+    Created at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@clink.created_at) %> ago
+  </dd>
+
+  <dt>
+    Updated at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@clink.updated_at) %> ago
+  </dd>
+</dl>
+

@@ -1,0 +1,35 @@
+<h1>
+  Add a new clink
+</h1>
+
+<hr>
+
+<%= render("clink_templates/validation_failures.html.erb") %>
+
+<form action="/insert_clink_record" method="post">
+  <div>
+    <label for="sender_id">
+      Sender
+    </label>
+
+    <input type="text" id="sender_id" name="sender_id" value="<%= @clink.sender_id %>">
+  </div>
+
+  <div>
+    <label for="recipient_id">
+      Recipient
+    </label>
+
+    <input type="text" id="recipient_id" name="recipient_id" value="<%= @clink.recipient_id %>">
+  </div>
+
+  <button>
+    Create clink
+  </button>
+</form>
+
+<hr>
+
+<a href="/clinks">
+  Go back
+</a>
