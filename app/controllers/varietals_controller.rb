@@ -21,7 +21,7 @@ class VarietalsController < ApplicationController
     @varietal = Varietal.new
 
     @varietal.grape = params.fetch("grape")
-    @varietal.wine_id = params.fetch("wine_id")
+#    @varietal.wine_id = params.fetch("wine_id")
 
     if @varietal.valid?
       @varietal.save

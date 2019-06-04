@@ -1,5 +1,5 @@
 <h1>
-  Favorite list
+  My Wine List
 </h1>
 
 <a href="/new_favorite_form">
@@ -10,57 +10,62 @@
 
 <table>
   <tr>
-    <th>
-      ID
-    </th>
 
-    <th>
-      Wine
-    </th>
-
-    <th>
-      User
-    </th>
-
-    <th>
-      Created at
-    </th>
-
-    <th>
-      Updated at
-    </th>
-
-    <th>
-    </th>
+    <th></th>
+    <th>Name</th>
+    <th>Varietal</th>
+    <th>Price</th>
+    <th>Location</th>
+    <th>Vintage</th>
+    <th></th>
+    <th>Rating</th>
+    <th></th>
   </tr>
 
-  <% @favorites.each do |favorite| %>
+  <% @fave_wines.each do |wine| %>
   <tr>
+
     <td>
-      <%= favorite.id %>
+      <i class="fas fa-wine-glass"></i>
     </td>
 
     <td>
-      <%= favorite.wine_id %>
-    </td>
-
-    <td>
-      <%= favorite.user_id %>
-    </td>
-
-    <td>
-      <%= time_ago_in_words(favorite.created_at) %> ago
-    </td>
-
-    <td>
-      <%= time_ago_in_words(favorite.updated_at) %> ago
-    </td>
-
-    <td>
-      <a href="/favorites/<%= favorite.id %>">
-        Show details
+      <a href="/favorites/<%= wine.id %>">
+        <%= wine.name %>
       </a>
     </td>
+
+    <td>
+      <%= wine.varietal %>
+    </td>
+
+    <td>
+      <%= wine.price %>
+    </td>
+
+    <td>
+      <%= wine.location_of_origin %>
+    </td>
+
+    <td>
+      <%= wine.year_of_origin %>
+    </td>
+
+    <td>
+      <img src="<%= wine.image %>">
+    </td>
+
+    <td>
+      <%= @score %>
+    </td>
+    
+    <td>
+      <a href="/delete_favorite/<%= wine.id %>">
+      <i class="fas fa-minus-circle"></i>
+      </a>
+    </td>
+
+
   </tr>
   <% end %>
 </table>

@@ -1,7 +1,8 @@
 class FavoritesController < ApplicationController
   def list
     @favorites = Favorite.all
-
+    @favorite_wine_ids = Favorite.all.pluck(:wine_id)
+    @fave_wines = Wine.where({ :id => @favorite_wine_ids })
     render("favorite_templates/list.html.erb")
   end
 

@@ -2,23 +2,6 @@
   Add a New Wine
 </h1>
 
-<h3>Add a wine from our database:</h3>
-<form action="/new_favorite_form/<%= @wine.id %>">
-  <input type="hidden" value="<%= @wine.id %>" name="wine_id">
-
-  <label for="wine_dropdown">Wine Selector</label>
-  <select id="wine_dropdown" name="wine_id" >
-    <% Wine.all.order({ :name => :asc }).each do |a_wine| %>
-        <option value="<%= a_wine.id %>">
-        <%= a_wine.name %> <%= a_wine.varietal %>
-        </option>
-    <% end %>
-    </select>
-
-  <button>Add to My Wine List</button>
-</form>
-
-<h3>Or, create a new wine:</h3>
 <hr>
 
 <%= render("wine_templates/validation_failures.html.erb") %>
@@ -33,10 +16,10 @@
   </div>
 
   <div>
-    <label for="varietal">Varietal</label>
-      <select id="varietal" name="varietal" >
+    <label for="varietal_dropdown">Varietal</label>
+      <select id="varietal_dropdown" name="varietal" value="<%= @wine.varietal %>">
         <% Varietal.all.order({ :grape => :asc }).each do |a_grape| %>
-          <option value="<%= @wine.varietal %>">
+          <option value="<%= a_grape.grape %>">
           <%= a_grape.grape %>
           </option>
         <% end %>
