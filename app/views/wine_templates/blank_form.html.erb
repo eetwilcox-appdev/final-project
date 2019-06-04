@@ -1,7 +1,24 @@
 <h1>
-  Add a new wine
+  Add a New Wine
 </h1>
 
+<h3>Add a wine from our database:</h3>
+<form action="/new_favorite_form/<%= @wine.id %>">
+  <input type="hidden" value="<%= @wine.id %>" name="wine_id">
+
+  <label for="wine_dropdown">Wine Selector</label>
+  <select id="wine_dropdown" name="wine_id" >
+    <% Wine.all.order({ :name => :asc }).each do |a_wine| %>
+        <option value="<%= a_wine.id %>">
+        <%= a_wine.name %> <%= a_wine.varietal %>
+        </option>
+    <% end %>
+    </select>
+
+  <button>Add to My Wine List</button>
+</form>
+
+<h3>Or, create a new wine:</h3>
 <hr>
 
 <%= render("wine_templates/validation_failures.html.erb") %>
@@ -16,11 +33,15 @@
   </div>
 
   <div>
-    <label for="varietal">
-      Varietal
+    <label for="varietal">Varietal</label>
+      <select id="varietal" name="varietal" >
+        <% Varietal.all.order({ :grape => :asc }).each do |a_grape| %>
+          <option value="<%= @wine.varietal %>">
+          <%= a_grape.grape %>
+          </option>
+        <% end %>
+      </select>
     </label>
-
-    <input type="text" id="varietal" name="varietal" value="<%= @wine.varietal %>">
   </div>
 
   <div>
@@ -28,12 +49,12 @@
       Price
     </label>
 
-    <input type="text" id="price" name="price" value="<%= @wine.price %>">
+    <input type="text" id="price" name="price" value="$<%= @wine.price %>">
   </div>
 
   <div>
     <label for="location_of_origin">
-      Location of origin
+      Location
     </label>
 
     <input type="text" id="location_of_origin" name="location_of_origin" value="<%= @wine.location_of_origin %>">
@@ -41,7 +62,7 @@
 
   <div>
     <label for="year_of_origin">
-      Year of origin
+      Vintage
     </label>
 
     <input type="text" id="year_of_origin" name="year_of_origin" value="<%= @wine.year_of_origin %>">
@@ -49,14 +70,14 @@
 
   <div>
     <label for="image">
-      Image
+      Image Link
     </label>
 
     <input type="text" id="image" name="image" value="<%= @wine.image %>">
   </div>
 
   <button>
-    Create wine
+    Create Wine
   </button>
 </form>
 

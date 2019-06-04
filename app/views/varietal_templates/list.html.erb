@@ -1,9 +1,9 @@
 <h1>
-  Varietal list
+  Varietal List
 </h1>
 
 <a href="/new_varietal_form">
-  Add a new varietal
+  Add a New Varietal
 </a>
 
 <hr>
@@ -11,23 +11,7 @@
 <table>
   <tr>
     <th>
-      ID
-    </th>
-
-    <th>
       Grape
-    </th>
-
-    <th>
-      Wine
-    </th>
-
-    <th>
-      Created at
-    </th>
-
-    <th>
-      Updated at
     </th>
 
     <th>
@@ -48,13 +32,6 @@
       <%= varietal.wine_id %>
     </td>
 
-    <td>
-      <%= time_ago_in_words(varietal.created_at) %> ago
-    </td>
-
-    <td>
-      <%= time_ago_in_words(varietal.updated_at) %> ago
-    </td>
 
     <td>
       <a href="/varietals/<%= varietal.id %>">

@@ -7,6 +7,8 @@ class WinesController < ApplicationController
 
   def details
     @wine = Wine.where({ :id => params.fetch("id_to_display") }).first
+    @global_wine_rating = Rating.where({ :wine_id => @wine.id }).pluck(:score)
+    @my_wine_rating = Rating.where({ :user_id => 10 }).pluck(:score).first
 
     render("wine_templates/details.html.erb")
   end

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
   # Home Page
-  #match("/", { :controller => "wines", :action => "list", :via => "get" })
+  match("/", { :controller => "wines", :action => "list", :via => "get" })
   
   # Routes for the Varietal resource:
 

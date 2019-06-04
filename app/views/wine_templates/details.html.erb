@@ -22,7 +22,7 @@
 
 <table>
   <tr>
-    <td rowspan="5"><img src="<%= @wine.image %>"></td>
+    <td rowspan="7"><img src="<%= @wine.image %>"></td>
     <td>Name:</td>
     <td><%= @wine.name %></td>
   </tr>
@@ -41,12 +41,53 @@
     <td><%= @wine.location_of_origin %></td>
   </tr>
   
-    <tr>
+  <tr>
     <td>Vintage:</td>
     <td><%= @wine.year_of_origin %></td>
   </tr>
   
+  <tr>
+    <td>WineWise Global Rating:</td>
+    <td><%= @global_wine_rating.sum.fdiv(@global_wine_rating.size) %></td>
+  </tr>
+  
+  <tr>
+    <td>Your Rating:</td>
+    <td><%= @my_wine_rating %></td>
+  </tr>
+  
 </table>
+
+<h1>Reviews</h1>
+
+<table>
+  <tr>
+    <th>Reviewer</th>
+    <th>Comment</th>
+    <th>Rating</th>
+  </tr>
+
+  <% @wine.reviews.order({ :created_at => :asc }).each do |rating| %>
+  <tr>
+    <td>
+      <%= rating.user_id %>
+    </td>
+
+    <td>
+      <%= rating.comment %>
+    </td>
+
+    <td>
+      <%= rating.score %>
+    </td>
+
+    <td>
+      <%= time_ago_in_words(rating.created_at) %> ago
+    </td>
+  </tr>
+  <% end %>
+</table>
+
 
 <dl>
   <dt>
