@@ -39,34 +39,23 @@
     <!-- ↓↓↓ Your view templates all get plugged in below ↓↓↓ -->
         <nav>
       <div>
-        <a href="/">
-          <i class="fas fa-star fa-fw"></i>
-
-          Home
+        <a href="/wines">
+          <i class="fas fa-globe fa-fw"></i>
+          WineWise Database
         </a>
       </div>
 
       <div>
         <a href="/new_wine_form">
           <i class="fas fa-plus fa-fw"></i>
-
-          Add a wine
+          Add a Wine
         </a>
       </div>
 
       <div>
         <a href="/favorites">
           <i class="fas fa-heart fa-fw"></i>
-
-          Favorites
-        </a>
-      </div>
-
-      <div>
-        <a href="/users">
-          <i class="fas fa-users"></i>
-
-          All Users
+          My Wine List
         </a>
       </div>
 
@@ -75,19 +64,19 @@
       <% if current_user.blank? %>
         <div>
           <a href="/users/sign_in">
-            Sign in
+            Sign In
           </a>
         </div>
 
         <div>
           <a href="/users/sign_up">
-            Sign up
+            Sign Up
           </a>
         </div>
       <% else %>
         <div>
           <a href="/users/edit">
-            Edit <%= current_user.username %>'s Profile
+            Edit My Profile
           </a>
         </div>
 

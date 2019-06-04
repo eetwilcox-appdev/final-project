@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
   # Home Page
-  match("/", { :controller => "favorites", :action => "list", :via => "get" })
+  #match("/", { :controller => "wines", :action => "list", :via => "get" })
   
   # Routes for the Varietal resource:
 
@@ -68,7 +68,7 @@ Rails.application.routes.draw do
   match("/insert_favorite_record", { :controller => "favorites", :action => "save_new_info", :via => "post" })
 
   # READ
-  #match("/favorites", { :controller => "favorites", :action => "list", :via => "get" })
+  match("/favorites", { :controller => "favorites", :action => "list", :via => "get" })
   match("/favorites/:id_to_display", { :controller => "favorites", :action => "details", :via => "get" })
 
   # UPDATE

@@ -1,79 +1,63 @@
-<h1>
-  Wine #<%= @wine.id %> details
-</h1>
 
-<div>
-  <div>
-    <a href="/wines">
-      Go back
-    </a>
-  </div>
+<a href="/wines">
+  <i class="fas fa-chevron-circle-left"></i>
+</a>
+
+<h1>
+  <%= @wine.name %> Profile
+</h1>
 
   <div>
     <a href="/existing_wine_form/<%= @wine.id %>">
-      Edit wine
+      Edit Wine
     </a>
   </div>
 
   <div>
     <a href="/delete_wine/<%= @wine.id %>">
-      Delete wine
+      Delete Wine
     </a>
   </div>
 </div>
 
+<table>
+  <tr>
+    <td rowspan="5"><img src="<%= @wine.image %>"></td>
+    <td>Name:</td>
+    <td><%= @wine.name %></td>
+  </tr>
+  <tr>
+    <td>Varietal:</td>
+    <td><%= @wine.varietal %></td>
+  </tr>
+  
+  <tr>
+    <td>Price:</td>
+    <td><%= @wine.price %></td>
+  </tr>
+  
+  <tr>
+    <td>Location:</td>
+    <td><%= @wine.location_of_origin %></td>
+  </tr>
+  
+    <tr>
+    <td>Vintage:</td>
+    <td><%= @wine.year_of_origin %></td>
+  </tr>
+  
+</table>
+
 <dl>
   <dt>
-    Name
-  </dt>
-  <dd>
-    <%= @wine.name %>
-  </dd>
-
-  <dt>
-    Varietal
-  </dt>
-  <dd>
-    <%= @wine.varietal %>
-  </dd>
-
-  <dt>
-    Price
-  </dt>
-  <dd>
-    <%= @wine.price %>
-  </dd>
-
-  <dt>
-    Location of origin
-  </dt>
-  <dd>
-    <%= @wine.location_of_origin %>
-  </dd>
-
-  <dt>
-    Year of origin
-  </dt>
-  <dd>
-    <%= @wine.year_of_origin %>
-  </dd>
-
-  <dt>
-    Image
-  </dt>
-  <dd>
-    <%= @wine.image %>
-  </dd>
-
-  <dt>
-    Created at
+    Created
   </dt>
   <dd>
     <%= time_ago_in_words(@wine.created_at) %> ago
   </dd>
 
   <dt>
-    Updated at
+    Last Updated
   </dt>
   <dd>
     <%= time_ago_in_words(@wine.updated_at) %> ago
