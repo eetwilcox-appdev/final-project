@@ -1,7 +1,9 @@
 class WinesController < ApplicationController
   def list
     @wines = Wine.all
-
+    @wine_id = Wine.pluck(:id)
+    @global_wine_rating = Rating.where({ :wine_id => @wine_id }).pluck(:score)
+    
     render("wine_templates/list.html.erb")
   end
 

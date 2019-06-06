@@ -1,13 +1,16 @@
 class FavoritesController < ApplicationController
   def list
-    @favorites = Favorite.all
-    @favorite_wine_ids = Favorite.all.pluck(:wine_id)
+    @favorites = Favorite.where({ :user_id => current_user.id })
+    @favorite_wine_ids = Favorite.where({ :user_id => current_user.id }).pluck(:wine_id)
     @fave_wines = Wine.where({ :id => @favorite_wine_ids })
+    
     render("favorite_templates/list.html.erb")
   end
 
   def details
     @favorite = Favorite.where({ :id => params.fetch("id_to_display") }).first
+    @favorite_wine_ids = Favorite.where({ :id => params.fetch("id_to_display") }).pluck(:wine_id)
+    @fave_wine_score = Rating.where({ :id => @favorite_wine_ids })
 
     render("favorite_templates/details.html.erb")
   end
@@ -55,7 +58,7 @@ class FavoritesController < ApplicationController
   end
 
   def remove_row
-    @favorite = Favorite.where({ :id => params.fetch("id_to_remove") }).first
+    @favorite = Favorite.where({ :wine_id => params.fetch("id_to_remove") }).first
 
     @favorite.destroy
 

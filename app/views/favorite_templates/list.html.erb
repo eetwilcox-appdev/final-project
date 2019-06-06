@@ -1,14 +1,14 @@
 <h1>
   My Wine List
+  <a href="/new_favorite_form" class="btn btn-primary">
+  + Add a new favorite
+  </a>
+  
 </h1>
-
-<a href="/new_favorite_form">
-  Add a new favorite
-</a>
 
 <hr>
 
-<table>
+<table cellpadding="12">
   <tr>
 
     <th></th>
@@ -17,8 +17,8 @@
     <th>Price</th>
     <th>Location</th>
     <th>Vintage</th>
-    <th></th>
-    <th>Rating</th>
+    <th>Global Rating</th>
+    <th>My Rating</th>
     <th></th>
   </tr>
 
@@ -52,16 +52,17 @@
     </td>
 
     <td>
-      <img src="<%= wine.image %>">
+      !!!
     </td>
-
+    
     <td>
-      <%= @score %>
+      !!!
     </td>
     
     <td>
       <a href="/delete_favorite/<%= wine.id %>">
       <i class="fas fa-minus-circle"></i>
+      Remove from My Wine List
       </a>
     </td>
 

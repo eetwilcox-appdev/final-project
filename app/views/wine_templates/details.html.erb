@@ -1,24 +1,11 @@
-
 <a href="/wines">
   <i class="fas fa-chevron-circle-left"></i>
+  Back
 </a>
 
 <h1>
-  <%= @wine.name %> Profile
+  <%= @wine.name %> <%= @wine.varietal %>
 </h1>
-
-  <div>
-    <a href="/existing_wine_form/<%= @wine.id %>">
-      Edit Wine
-    </a>
-  </div>
-
-  <div>
-    <a href="/delete_wine/<%= @wine.id %>">
-      Delete Wine
-    </a>
-  </div>
-</div>
 
 <table>
   <tr>
@@ -58,6 +45,20 @@
   
 </table>
 
+<div>
+  <a href="/existing_wine_form/<%= @wine.id %>">
+     Edit Wine
+  </a>
+</div>
+
+<div>
+  <a href="/delete_wine/<%= @wine.id %>">
+    Delete Wine
+  </a>
+</div>
+
+<hr>
+
 <h1>Reviews</h1>
 
 <table>
@@ -88,6 +89,35 @@
   <% end %>
 </table>
 
+<button><a href="/new_rating_form">Rate this Wine</a></button>
+  
+<h3>Review this Wine</h3>
+<form action="/create_comment_record/<%= @wine.id %>">
+  <input type="hidden" value="<%= @wine.id %>" name="wine_id">
+
+  <label for="reviewer_dropdown">Reviewer</label>
+  <select id="reviewer_dropdown" name="reviewer_id" >
+    <% User.all.order({ :email => :asc }).each do |a_user| %>
+        <option value="<%= a_user.id %>">
+        <%= a_user.email %>
+        </option>
+    <% end %>
+    </select>
+
+  <div>
+    <label for="score">Review</label>
+    <input type="number" name="score" placeholder="Select a score...">
+  </div>
+  
+  <div>
+    <label for="review_box">Review</label>
+  <textarea id="review_box" name="review_text" placeholder="Write a review..."></textarea>
+  </div>
+
+  <button>Post Review</button>
+</form>
+  
+<hr>
 
 <dl>
   <dt>
@@ -97,6 +127,7 @@
     <%= time_ago_in_words(@wine.created_at) %> ago
   </dd>
 
+
   <dt>
     Last Updated
   </dt>
@@ -104,4 +135,3 @@
     <%= time_ago_in_words(@wine.updated_at) %> ago
   </dd>
 </dl>
-

@@ -1,24 +1,21 @@
 <h1>
   WineWise Database
+  <a href="/new_wine_form" class="btn btn-primary">+ Add a New Wine</a>
 </h1>
-
-<a href="/new_wine_form">
-  Add a new wine
-</a>
 
 <hr>
 
-<table>
+<table cellpadding="12">
+  
   <tr>
-
     <th></th>
     <th>Name</th>
     <th>Varietal</th>
     <th>Price</th>
     <th>Location</th>
     <th>Vintage</th>
+    <th>Global Rating</th>
     <th></th>
-    <th>Rating</th>
     <th></th>
   </tr>
 
@@ -30,9 +27,7 @@
     </td>
 
     <td>
-      <a href="/wines/<%= wine.id %>">
-        <%= wine.name %>
-      </a>
+      <%= wine.name %>
     </td>
 
     <td>
@@ -52,17 +47,23 @@
     </td>
 
     <td>
-      <img src="<%= wine.image %>">
-    </td>
-
-    <td>
-      <%= @score %>
+      <%= @global_wine_rating %>
     </td>
     
     <td>
-      <a href="/new_wine_form">
-      <i class="fas fa-plus-circle"></i>
+      <a href="/wines/<%= wine.id %>" class="btn btn-outline-primary">
+        View Profile
       </a>
+    </td>
+    
+    <td>
+      <form action="/insert_favorite_record" method="post">
+        <input type="hidden" name="wine_id" value="<%= wine.id %>">
+        <input type="hidden" name="user_id" value="<%= current_user.id %>">
+          <button class="btn btn-primary"><i class="fab fa-gratipay"></i>
+            Add to My Wine List
+          </button>
+      </form>
     </td>
 
 

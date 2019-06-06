@@ -7,7 +7,8 @@
 <form action="/insert_favorite_record" method="post">
   <input type="hidden" id="user_id" name="user_id" value="<%= @favorite.user_id %>">
 
-  <label for="wine_dropdown">Select a wine from the dropdown below:</label>
+  <label for="wine_dropdown">Select a wine from the dropdown:</label>
+  <br>
   <select id="wine_dropdown" name="wine_id" value="<%= @favorite.wine_id %>">
     <% Wine.all.order({ :name => :asc }).each do |a_wine| %>
         <option value="<%= a_wine.id %>">
