@@ -16,6 +16,20 @@ class ClinksController < ApplicationController
 
     render("clink_templates/blank_form.html.erb")
   end
+  
+  def user_profile
+    @user = User.where({ :id => params.fetch("id_to_display") }).first
+    
+    render("users/user_profiles.html.erb")
+  end
+  
+  def user_list
+    @users = User.all
+    @clinks = Clink.where({ :sender_id => current_user.id })
+    
+    render("users/user_list.html.erb")
+  end
+  
 
   def save_new_info
     @clink = Clink.new
@@ -26,7 +40,7 @@ class ClinksController < ApplicationController
     if @clink.valid?
       @clink.save
 
-      redirect_to("/clinks", { :notice => "Clink created successfully." })
+      redirect_to("/users", { :notice => "Clink created successfully." })
     else
       render("clink_templates/blank_form.html.erb")
     end

@@ -61,6 +61,9 @@ Rails.application.routes.draw do
   #------------------------------
 
   devise_for :users
+  match("/users", { :controller => "clinks", :action => "user_list", :via => "get" })
+  match("/users/:id_to_display", { :controller => "clinks", :action => "user_profile", :via => "get" })
+  
   # Routes for the Favorite resource:
 
   # CREATE

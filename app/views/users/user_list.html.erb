@@ -1,0 +1,57 @@
+<style>
+    .crop img {
+         height: auto;
+         width: 400px;
+</style>
+
+<h1>WineWise Network</h1>
+<h3>
+    You have <a href="/clinks"><%= @clinks.count %> clinks</a>!
+</h3>
+
+<hr>
+
+<table cellpadding="8">
+  
+  <tr>
+    <th></th>
+    <th>Name</th>
+    <th>Email</th>
+    <th></th>
+  </tr>
+
+  <% @users.each do |a_user| %>
+    <tr>
+    <td class="crop">
+        <img src="<%= a_user.profile_pic %>">
+    </td>
+
+    <td>
+      <%= a_user.name %>
+    </td>
+
+    <td>
+      <%= a_user.email %>
+    </td>
+    
+    <td>
+      <a href="/users/<%= a_user.id %>">
+        View Profile
+      </a>
+    </td>
+    
+    <td>
+    <form action="/insert_clink_record" method="post">
+        <input type="hidden" name="sender_id" value="<%= current_user.id %>">
+        <input type="hidden" name="recipient_id" value="<%= a_user.id %>">
+          <button class="btn btn-primary">
+            <i class="fas fa-glass-cheers"></i> Clink! 
+          </button>
+    </form>
+    </td>
+    </tr>
+    
+    <% end %>
+
+
+</table>

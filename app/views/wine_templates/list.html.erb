@@ -5,7 +5,7 @@
 
 <hr>
 
-<table cellpadding="12">
+<table cellpadding="8">
   
   <tr>
     <th></th>
@@ -19,12 +19,21 @@
     <th></th>
   </tr>
 
-  <% @wines.each do |wine| %>
+  <% @wines.each_with_index do |wine, index| %>
   <tr>
-
+    
+    <% if wine.id = @my_favorites %>
     <td>
       <i class="fas fa-wine-glass"></i>
     </td>
+    
+    <% else %>
+    
+    <td>
+      <i class="fas fa-heart"></i>
+    </td>
+    
+    <% end %>
 
     <td>
       <%= wine.name %>
@@ -47,11 +56,11 @@
     </td>
 
     <td>
-      <%= @global_wine_rating %>
+      <%= @global_wine_rating[index].sum.fdiv(@global_wine_rating[index].size).round(2) %>
     </td>
     
     <td>
-      <a href="/wines/<%= wine.id %>" class="btn btn-outline-primary">
+      <a href="/wines/<%= wine.id %>">
         View Profile
       </a>
     </td>

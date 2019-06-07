@@ -5,7 +5,7 @@
 <h3>Favorite a wine from our database:</h3>
 
 <form action="/insert_favorite_record" method="post">
-  <input type="hidden" id="user_id" name="user_id" value="<%= @favorite.user_id %>">
+  <input type="hidden" id="user_id" name="user_id" value="<%= current_user.id %>">
 
   <label for="wine_dropdown">Select a wine from the dropdown:</label>
   <br>
@@ -17,13 +17,18 @@
     <% end %>
     </select>
 
-  <button>Add to My Wine List</button>
+  <button class="btn btn-primary">Add to My Wine List</button>
 </form>
 
+<br>
 <h3>Don't see your wine listed here?</h3>
-<button><a href="/new_wine_form">Add a New Wine</a></button>
 
-<hr>
+
+<a href="/new_wine_form">
+  <button class="btn btn-primary">
+  Add a New Wine
+  </button>
+</a>
 
 <%= render("favorite_templates/validation_failures.html.erb") %>
 

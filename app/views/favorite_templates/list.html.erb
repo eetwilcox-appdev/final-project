@@ -1,46 +1,42 @@
 <h1>
   My Wine List
   <a href="/new_favorite_form" class="btn btn-primary">
-  + Add a new favorite
+  + Add a New Favorite
   </a>
   
 </h1>
 
 <hr>
 
-<table cellpadding="12">
+<table cellpadding="8">
   <tr>
 
     <th></th>
     <th>Name</th>
     <th>Varietal</th>
-    <th>Price</th>
     <th>Location</th>
     <th>Vintage</th>
-    <th>Global Rating</th>
-    <th>My Rating</th>
+    <th bgcolor="e9ecef"><i class="fas fa-globe-americas"></i> Global Rating</th>
+    <th bgcolor="e9ecef"><i class="fas fa-users"></i> My Clinks Rating</th>
+    <th bgcolor="e9ecef"><i class="fas fa-user-circle"></i> My Rating</th>
     <th></th>
   </tr>
 
-  <% @fave_wines.each do |wine| %>
+  <% @fave_wines.each_with_index do |wine, index| %>
   <tr>
 
     <td>
-      <i class="fas fa-wine-glass"></i>
+      <i class="fas fa-heart" ></i>
     </td>
 
     <td>
-      <a href="/favorites/<%= wine.id %>">
+      <a href="/wines/<%= wine.id %>">
         <%= wine.name %>
       </a>
     </td>
 
     <td>
       <%= wine.varietal %>
-    </td>
-
-    <td>
-      <%= wine.price %>
     </td>
 
     <td>
@@ -51,21 +47,34 @@
       <%= wine.year_of_origin %>
     </td>
 
-    <td>
-      !!!
+    <td bgcolor="e9ecef">
+      <%= @all_rating[index].sum.fdiv(@all_rating[index].size).round(2) %>
     </td>
     
-    <td>
-      !!!
+    <td bgcolor="e9ecef">
+      <%= @my_clinks_ratings %>
     </td>
     
-    <td>
-      <a href="/delete_favorite/<%= wine.id %>">
-      <i class="fas fa-minus-circle"></i>
-      Remove from My Wine List
-      </a>
+    <td bgcolor="e9ecef">
+      <%= @my_rating_score %>
     </td>
+    
+    <!--<td>-->
+    <!--  <a href="/delete_favorite/<%= wine.id %>">-->
+    <!--  <i class="fas fa-minus-circle"></i>-->
+    <!--  Remove from My Wine List-->
+    <!--  </a>-->
+    <!--</td>-->
 
+    <td>
+      <form action="/delete_favorite/<%= wine.id %>">
+        <input type="hidden" name="wine_id" value="<%= wine.id %>">
+        <input type="hidden" name="user_id" value="<%= current_user.id %>">
+          <button class="btn btn-outline-primary"><i class="fas fa-minus-circle"></i>
+            Remove
+          </button>
+      </form>
+    </td>
 
   </tr>
   <% end %>

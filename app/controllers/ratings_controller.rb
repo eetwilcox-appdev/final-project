@@ -28,7 +28,7 @@ class RatingsController < ApplicationController
     if @rating.valid?
       @rating.save
 
-      redirect_to("/ratings", { :notice => "Rating created successfully." })
+      redirect_to("/wines/" + params.fetch("wine_id"), { :notice => "Rating created successfully." })
     else
       render("rating_templates/blank_form.html.erb")
     end

@@ -1,9 +1,27 @@
 class FavoritesController < ApplicationController
   def list
     @favorites = Favorite.where({ :user_id => current_user.id })
-    @favorite_wine_ids = Favorite.where({ :user_id => current_user.id }).pluck(:wine_id)
-    @fave_wines = Wine.where({ :id => @favorite_wine_ids })
+    favorite_wine_ids = Favorite.where({ :user_id => current_user.id }).pluck(:wine_id)
+    @fave_wines = Wine.where({ :id => favorite_wine_ids })
     
+    #for global rating
+    @all_rating = Array.new
+    favorite_wine_ids.each_with_index do |wine_id, index|
+      @all_rating[index] = Rating.where({ :wine_id => wine_id }).pluck(:score)
+    end
+    
+    # for clinks rating  
+    @my_clinks = Clink.where({ :sender_id => current_user.id }).pluck(:recipient_id)
+    clinks_favorite_wine_ids = Favorite.where({ :user_id => @my_clinks }).pluck(:wine_id)
+    
+    @my_clinks_score = Array.new
+    clinks_favorite_wine_ids.each do |wine_id|
+        @my_clinks_ratings = Rating.where({ :wine_id => wine_id}).where({ :user_id => @my_clinks }).pluck(:score)
+    end
+    
+    # for my rating
+    @my_rating_score = Rating.where({ :wine_id => favorite_wine_ids }).pluck(:score)
+
     render("favorite_templates/list.html.erb")
   end
 

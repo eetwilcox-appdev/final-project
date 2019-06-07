@@ -7,7 +7,7 @@
   <%= @wine.name %> <%= @wine.varietal %>
 </h1>
 
-<table>
+<table cellpadding="10">
   <tr>
     <td rowspan="7"><img src="<%= @wine.image %>"></td>
     <td>Name:</td>
@@ -35,12 +35,14 @@
   
   <tr>
     <td>WineWise Global Rating:</td>
-    <td><%= @global_wine_rating.sum.fdiv(@global_wine_rating.size) %></td>
+    <td><%= @global_wine_rating.sum.fdiv(@global_wine_rating.size).round(2) %></td>
   </tr>
   
   <tr>
     <td>Your Rating:</td>
-    <td><%= @my_wine_rating %></td>
+    <td><%= @my_wine_rating.sum.fdiv(@my_wine_rating.size).round(2) %>
+    <b>(<%= sprintf("%+.2f",((@my_wine_rating.sum.fdiv(@my_wine_rating.size)))-(@global_wine_rating.sum.fdiv(@global_wine_rating.size))) %>)</b>
+    </td>
   </tr>
   
 </table>
@@ -61,11 +63,11 @@
 
 <h1>Reviews</h1>
 
-<table>
+<table cellpadding="10">
   <tr>
     <th>Reviewer</th>
-    <th>Comment</th>
-    <th>Rating</th>
+    <th>Review</th>
+    <th>Global Rating</th>
   </tr>
 
   <% @wine.reviews.order({ :created_at => :asc }).each do |rating| %>
@@ -88,33 +90,35 @@
   </tr>
   <% end %>
 </table>
-
-<button><a href="/new_rating_form">Rate this Wine</a></button>
   
-<h3>Review this Wine</h3>
-<form action="/create_comment_record/<%= @wine.id %>">
+<br>
+<h3>Add a Review</h3>
+<form action="/insert_rating_record" method="post">
   <input type="hidden" value="<%= @wine.id %>" name="wine_id">
-
-  <label for="reviewer_dropdown">Reviewer</label>
-  <select id="reviewer_dropdown" name="reviewer_id" >
-    <% User.all.order({ :email => :asc }).each do |a_user| %>
-        <option value="<%= a_user.id %>">
-        <%= a_user.email %>
-        </option>
-    <% end %>
-    </select>
-
+  <input type="hidden" value="<%= current_user.id %>" name="user_id">
+  
   <div>
-    <label for="score">Review</label>
-    <input type="number" name="score" placeholder="Select a score...">
+    <label for="score">
+      Rating:
+    </label>
+  
+      <select id="score" name="score">
+        <% [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0].each do |a_score| %>
+          <option value="<%= a_score %>">
+            <%= a_score %>
+          </option>
+        <% end %>
+      </select>
+    </label>
   </div>
   
   <div>
-    <label for="review_box">Review</label>
-  <textarea id="review_box" name="review_text" placeholder="Write a review..."></textarea>
+    <label for="review_box">Review:</label>
+    <br>
+    <textarea id="review_box" name="comment" placeholder="Write a review..." rows="4" cols="80"></textarea>
   </div>
 
-  <button>Post Review</button>
+  <button class="btn btn-primary">Post Review</button>
 </form>
   
 <hr>
