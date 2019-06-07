@@ -21,19 +21,10 @@
 
   <% @wines.each_with_index do |wine, index| %>
   <tr>
-    
-    <% if wine.id = @my_favorites %>
+
     <td>
       <i class="fas fa-wine-glass"></i>
     </td>
-    
-    <% else %>
-    
-    <td>
-      <i class="fas fa-heart"></i>
-    </td>
-    
-    <% end %>
 
     <td>
       <%= wine.name %>
