@@ -2,7 +2,7 @@ class FavoritesController < ApplicationController
   def list
     @favorites = Favorite.where({ :user_id => current_user.id })
     favorite_wine_ids = Favorite.where({ :user_id => current_user.id }).pluck(:wine_id)
-    @fave_wines = Wine.where({ :id => favorite_wine_ids })
+    @fave_wines = current_user.favorite_wines
     
     #for global rating
     @all_rating = Array.new
@@ -11,7 +11,7 @@ class FavoritesController < ApplicationController
     end
     
     # for clinks rating  
-    @my_clinks = Clink.where({ :sender_id => current_user.id }).pluck(:recipient_id)
+    @my_clinks = current_user.clinks
     clinks_favorite_wine_ids = Favorite.where({ :user_id => @my_clinks }).pluck(:wine_id)
     
     @my_clinks_score = Array.new

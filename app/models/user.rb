@@ -23,13 +23,15 @@
 
 class User < ApplicationRecord
   
-has_many :my_wines, :class_name => "Favorite", :dependent => :destroy
+has_many :favorites, :dependent => :destroy
 has_many :reviews, :class_name => "Rating", :dependent => :destroy
 has_many :sent_clinks, :class_name => "Clink", :foreign_key => "sender_id", :dependent => :destroy
 has_many :received_clinks, :class_name => "Clink", :foreign_key => "recipient_id", :dependent => :destroy
 
-has_many :following, :through => :sent_clinks, :source => :recipient
+has_many :favorite_wines, :through => :favorites, :source => :wine
 has_many :followers, :through => :received_clinks, :source => :sender
+has_many :clinks, :through => :sent_clinks, :source => :recipient
+has_many :reviews_by_clinks, :through => :clinks, :source => :reviews
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

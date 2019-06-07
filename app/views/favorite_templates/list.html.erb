@@ -48,15 +48,20 @@
     </td>
 
     <td bgcolor="e9ecef">
-      <%= @all_rating[index].sum.fdiv(@all_rating[index].size).round(2) %>
+      <% review_scores = wine.reviews.pluck(:score) %>
+      <%= (review_scores.sum/review_scores.count).round(2) %>
+      
     </td>
     
     <td bgcolor="e9ecef">
-      <%= @my_clinks_ratings %>
+      <%= current_user.reviews_by_clinks.where({:wine_id => wine.id})%>
     </td>
     
     <td bgcolor="e9ecef">
-      <%= @my_rating_score %>
+      <% my_wine_reviews = current_user.reviews.where({ :wine_id => wine.id }) %>
+      <% unless my_wine_reviews.empty? %>
+        <%= my_wine_reviews.pluck(:score) %>
+      <% end %>
     </td>
     
     <!--<td>-->

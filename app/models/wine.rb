@@ -15,8 +15,10 @@
 
 class Wine < ApplicationRecord
     
-has_many :my_wines, :class_name => "Favorite", :dependent => :destroy
+has_many :favorites, :dependent => :destroy
 has_many :reviews, :class_name => "Rating", :dependent => :destroy
 has_many :varietals, :dependent => :nullify
+
+has_many :fans, :through => :favorites, :source => :user
     
 end
