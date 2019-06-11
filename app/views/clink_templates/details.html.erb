@@ -1,54 +1,41 @@
 <h1>
-  Clink #<%= @clink.id %> details
+  <%= current_user.email.chomp("@example.com").capitalize %>'s Clinks
 </h1>
 
 <div>
-  <div>
-    <a href="/clinks">
-      Go back
-    </a>
-  </div>
-
-  <div>
-    <a href="/existing_clink_form/<%= @clink.id %>">
-      Edit clink
-    </a>
-  </div>
-
-  <div>
-    <a href="/delete_clink/<%= @clink.id %>">
-      Delete clink
-    </a>
-  </div>
+  <a href="/users">
+    Go back
+  </a>
 </div>
 
-<dl>
-  <dt>
-    Sender
-  </dt>
-  <dd>
-    <%= @clink.sender_id %>
-  </dd>
+<table cellpadding="10">
+  <tr>
+    <th>Clink</th>
+    <th>Clinking Since</th>
+    <th></th>
+  </tr>
 
-  <dt>
-    Recipient
-  </dt>
-  <dd>
-    <%= @clink.recipient_id %>
-  </dd>
-
-  <dt>
-    Created at
-  </dt>
-  <dd>
-    <%= time_ago_in_words(@clink.created_at) %> ago
-  </dd>
-
-  <dt>
-    Updated at
-  </dt>
-  <dd>
-    <%= time_ago_in_words(@clink.updated_at) %> ago
-  </dd>
-</dl>
+<% @my_clinks.each do |a_clink| %>
+  
+  <tr>
+    
+    <td>
+      <% clink_id = a_clink.recipient_id %>
+      <%= User.where({ :id => clink_id }).pluck(:email).first.chomp("@example.com").capitalize %>
+    </td>
+    
+    <td>
+      <%= time_ago_in_words(a_clink.created_at) %> ago
+    </td>
+    
+    <td>
+      <a href="/delete_clink/<%= a_clink.id %>">
+        <i class="fas fa-user-times"></i>
+      </a>
+    </td>
+    
+  </tr>
+  
+<% end %>
+</table>
 

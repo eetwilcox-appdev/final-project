@@ -7,9 +7,17 @@
   <%= @wine.name %> <%= @wine.varietal %>
 </h1>
 
+<form action="/insert_favorite_record" method="post">
+  <input type="hidden" name="wine_id" value="<%= @wine.id %>">
+  <input type="hidden" name="user_id" value="<%= current_user.id %>">
+    <button class="btn btn-primary"><i class="fab fa-gratipay"></i>
+      Add to My Wine List
+    </button>
+</form>
+
 <table cellpadding="10">
   <tr>
-    <td rowspan="7"><img src="<%= @wine.image %>"></td>
+    <td rowspan="8"><img src="<%= @wine.image %>"></td>
     <td>Name:</td>
     <td><%= @wine.name %></td>
   </tr>
@@ -34,19 +42,24 @@
   </tr>
   
   <tr>
+    <% unless @global_wine_rating.empty? %>
     <td>WineWise Global Rating:</td>
     <td><%= @global_wine_rating.sum.fdiv(@global_wine_rating.size).round(2) %></td>
+    <% end %>
   </tr>
   
   <tr>
+    <% unless @my_wine_rating.empty? %>
     <td>Your Rating:</td>
     <td><%= @my_wine_rating.sum.fdiv(@my_wine_rating.size).round(2) %>
     <b>(<%= sprintf("%+.2f",((@my_wine_rating.sum.fdiv(@my_wine_rating.size)))-(@global_wine_rating.sum.fdiv(@global_wine_rating.size))) %>)</b>
     </td>
+    <% end %>
   </tr>
   
 </table>
 
+<% if current_user.email == "admin@example.com" %>
 <div>
   <a href="/existing_wine_form/<%= @wine.id %>">
      Edit Wine
@@ -58,6 +71,7 @@
     Delete Wine
   </a>
 </div>
+<% end %>
 
 <hr>
 
@@ -67,13 +81,16 @@
   <tr>
     <th>Reviewer</th>
     <th>Review</th>
-    <th>Global Rating</th>
+    <th>Score</th>
   </tr>
 
   <% @wine.reviews.order({ :created_at => :asc }).each do |rating| %>
   <tr>
     <td>
-      <%= rating.user_id %>
+      <% rater_id = rating.user_id %>
+      <a href="/users/<%= rater_id %>">
+        <%= User.where({ :id => rater_id }).pluck(:email).first.chomp("@example.com").capitalize %>
+      </a>
     </td>
 
     <td>
@@ -87,6 +104,15 @@
     <td>
       <%= time_ago_in_words(rating.created_at) %> ago
     </td>
+    
+    <% if current_user.id == rater_id %>
+    <td>
+      <a href="/delete_rating/<%= rating.id %>">
+      <i class="fas fa-trash-alt"></i>
+      </a>
+    </td>
+    <% end %>
+    
   </tr>
   <% end %>
 </table>

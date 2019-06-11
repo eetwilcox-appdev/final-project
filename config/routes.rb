@@ -30,7 +30,7 @@ Rails.application.routes.draw do
 
   # READ
   match("/clinks", { :controller => "clinks", :action => "list", :via => "get" })
-  match("/clinks/:id_to_display", { :controller => "clinks", :action => "details", :via => "get" })
+  match("/clinks/:current_user_id", { :controller => "clinks", :action => "show_my_clinks", :via => "get" })
 
   # UPDATE
   match("/existing_clink_form/:id_to_prefill", { :controller => "clinks", :action => "prefilled_form", :via => "get" })

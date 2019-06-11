@@ -16,15 +16,15 @@
     <th>Varietal</th>
     <th>Location</th>
     <th>Vintage</th>
-    <th bgcolor="e9ecef"><i class="fas fa-globe-americas"></i> Global Rating</th>
-    <th bgcolor="e9ecef"><i class="fas fa-users"></i> My Clinks Rating</th>
-    <th bgcolor="e9ecef"><i class="fas fa-user-circle"></i> My Rating</th>
+    <th bgcolor="e9ecef" style="text-align:center"><i class="fas fa-user-circle"></i><br>My Rating</th>
+    <th style="text-align:center"><i class="fas fa-globe-americas"></i><br>Global Rating</th>
+    <th style="text-align:center"><i class="fas fa-users"></i><br>Clinks Rating</th>
+    <th style="text-align:center">Rated By</th>
     <th></th>
   </tr>
 
   <% @fave_wines.each_with_index do |wine, index| %>
   <tr>
-
     <td>
       <i class="fas fa-heart" ></i>
     </td>
@@ -46,41 +46,45 @@
     <td>
       <%= wine.year_of_origin %>
     </td>
+    
+    <td bgcolor="e9ecef" style="text-align:center">
+      <% my_wine_reviews = current_user.reviews.where({ :wine_id => wine.id }).pluck(:score) %>
+      <% unless my_wine_reviews.empty? %>
+        <%= (my_wine_reviews.sum)/(my_wine_reviews.count).round(2) %>
+      <% end %>
+    </td>
 
-    <td bgcolor="e9ecef">
-      <% review_scores = wine.reviews.pluck(:score) %>
-      <%= (review_scores.sum/review_scores.count).round(2) %>
+    <td style="text-align:center">
+      <% global_review_scores = wine.reviews.pluck(:score) %>
+      <%= (global_review_scores.sum/global_review_scores.count).round(2) %>
       
     </td>
     
-    <td bgcolor="e9ecef">
-      <%= current_user.reviews_by_clinks.where({:wine_id => wine.id})%>
-    </td>
-    
-    <td bgcolor="e9ecef">
-      <% my_wine_reviews = current_user.reviews.where({ :wine_id => wine.id }) %>
-      <% unless my_wine_reviews.empty? %>
-        <%= my_wine_reviews.pluck(:score) %>
+    <td style="text-align:center">
+      <% my_clinks_review_scores = current_user.reviews_by_clinks.where({ :wine_id => wine.id }).pluck(:score)%>
+      <% unless my_clinks_review_scores.empty? %>
+        <%= (my_clinks_review_scores.sum/my_clinks_review_scores.count).round(2) %>
       <% end %>
     </td>
     
-    <!--<td>-->
-    <!--  <a href="/delete_favorite/<%= wine.id %>">-->
-    <!--  <i class="fas fa-minus-circle"></i>-->
-    <!--  Remove from My Wine List-->
-    <!--  </a>-->
-    <!--</td>-->
+    <td style="text-align:center">
+      <% array_of_clinks = current_user.reviews_by_clinks.where({ :wine_id => wine.id }).pluck(:email) %>
+      <% array_of_clinks.each_with_index do |clink, index| %>
+        <%= clink.capitalize.chomp("@example.com") %><br>
+      <% end %>
+    </td>
 
+    <% favorite_id = Favorite.where({ :wine_id => wine.id }).where({ :user_id => current_user.id }).pluck(:id).first %>
     <td>
-      <form action="/delete_favorite/<%= wine.id %>">
+      <form action="/delete_favorite/<%= favorite_id %>">
         <input type="hidden" name="wine_id" value="<%= wine.id %>">
         <input type="hidden" name="user_id" value="<%= current_user.id %>">
           <button class="btn btn-outline-primary"><i class="fas fa-minus-circle"></i>
-            Remove
+          Remove
           </button>
       </form>
     </td>
-
+    
   </tr>
   <% end %>
 </table>

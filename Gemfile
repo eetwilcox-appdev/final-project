@@ -17,7 +17,7 @@ gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "uglifier", ">= 1.3.0"
 
 group :production do
-  gem "pg"
+  gem "pg", "~> 0.18"
   gem "rails_12factor"
 end
 
@@ -29,7 +29,6 @@ group :development, :test do
   gem "dotenv-rails"
   gem "grade_runner", github: "firstdraft/grade_runner"
   gem "pry-rails"
-  gem "sqlite3", "~> 1.3", "< 1.4"
   gem "web_git", github: "firstdraft/web_git"
 end
 
@@ -43,6 +42,7 @@ group :development do
   gem "spring-watcher-listen", "~> 2.0.0f"
   gem "spring"
   gem "web-console", ">= 3.3.0"
+  gem "sqlite3"
 end
 
 group :test do

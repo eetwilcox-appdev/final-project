@@ -5,8 +5,8 @@ class ClinksController < ApplicationController
     render("clink_templates/list.html.erb")
   end
 
-  def details
-    @clink = Clink.where({ :id => params.fetch("id_to_display") }).first
+  def show_my_clinks
+    @my_clinks = Clink.where({ :sender_id => current_user.id }).all
 
     render("clink_templates/details.html.erb")
   end
@@ -72,6 +72,6 @@ class ClinksController < ApplicationController
 
     @clink.destroy
 
-    redirect_to("/clinks", { :notice => "Clink deleted successfully." })
+      redirect_to("/clinks/" + current_user.id.to_s, { :notice => "Clink deleted successfully." })
   end
 end

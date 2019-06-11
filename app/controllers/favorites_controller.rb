@@ -23,6 +23,7 @@ class FavoritesController < ApplicationController
     @my_rating_score = Rating.where({ :wine_id => favorite_wine_ids }).pluck(:score)
 
     render("favorite_templates/list.html.erb")
+    
   end
 
   def details
@@ -76,7 +77,7 @@ class FavoritesController < ApplicationController
   end
 
   def remove_row
-    @favorite = Favorite.where({ :wine_id => params.fetch("id_to_remove") }).first
+    @favorite = Favorite.where({ :id => params.fetch("id_to_remove") }).first
 
     @favorite.destroy
 

@@ -1,10 +1,10 @@
-<h1><%= @user.email %></h1>
+<h1><%= @user.email.chomp("@example.com").capitalize %></h1>
   
   <form action="/insert_clink_record" method="post">
         <input type="hidden" name="sender_id" value="<%= current_user.id %>">
         <input type="hidden" name="recipient_id" value="<%= @user.id %>">
           <button class="btn btn-primary">
-            <i class="fas fa-glass-cheers"></i> Clink with <%= @user.email %>
+            <i class="fas fa-glass-cheers"></i> Clink with <%= @user.email.chomp("@example.com").capitalize %>
           </button>
   </form>
 
@@ -13,12 +13,10 @@
 <table cellpadding="10">
   <tr>
     <td rowspan="5"><img src="<%= @user.profile_pic %>"></td>
-    <td>Name:</td>
-    <td><%= @user.name %></td>
   </tr>
   <tr>
-    <td>Email:</td>
-    <td><%= @user.email %></td>
+    <td>Name:</td>
+    <td><%= @user.email.chomp("@example.com").capitalize %></td>
   </tr>
   
   <tr>
@@ -33,6 +31,7 @@
 
   <tr>
       <td></td>
+      <% if current_user == @user %>
       <td>
          <a href="/users/edit">
             <button class="btn btn-primary">
@@ -40,6 +39,7 @@
             </button>
         </a>
       </td>
+      <% end %>
   </tr>
   
 </table>

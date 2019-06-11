@@ -59,9 +59,10 @@ class RatingsController < ApplicationController
 
   def remove_row
     @rating = Rating.where({ :id => params.fetch("id_to_remove") }).first
+    @return_wine = Wine.where({ :id => @rating.wine_id }).pluck(:id).first
 
     @rating.destroy
 
-    redirect_to("/ratings", { :notice => "Rating deleted successfully." })
+    redirect_to("/wines/" + @return_wine.to_s, { :notice => "Rating deleted successfully." })
   end
 end
